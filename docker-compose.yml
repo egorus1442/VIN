@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    ports:
+      - "8191:8191"
+    environment:
+      - LOG_LEVEL=info
+    restart: unless-stopped
+
+  vinapi:
+    build: .
+    container_name: vinapi
+    ports:
+      - "8080:8080"
+    depends_on:
+      - flaresolverr
